@@ -59,3 +59,20 @@ parameters:
 | Y_7   | 0.3393   |
 | Y_8   | 0.276963 |
 | Y_9   | 0.15695  |
+
+My appologies that I was unable to report the L1 loss for XGBoost.
+
+## CNN to LSTM model
+
+![3D CNN-LSTM HAL Hackathon Architecture](https://user-images.githubusercontent.com/13607221/165409945-44d4f4be-06a5-4d64-83ea-dda053561471.png)
+
+
+The CNN to LSTM model needs significant hyperparemeter tuning to be more accurate. Currently we compress the embedding layers far too much, our Space Embedding shape is `(time, "sentences", embedding-dim) == (133, 960, 32)`. So we compress each 3D shape from `(133 * 196 * 39) =~ 1 million to 32, which is likely too much compression. Also our LSTM is quite shallow, with only 2 LSTM layers in each direction. Therefore, if we had time to optimize (1) the Space Embedding size, (2) the number of LSTM layers and (3) the LSTM lauers' hidden size we would get much better results.
+
+Nevertheless, the entire system is connected together and working! Here is our final result: 
+
+![CleanShot 2022-04-26 at 18 22 37](https://user-images.githubusercontent.com/13607221/165410004-9319069c-c5a1-4a91-abd5-505f9007643f.png)
+
+Thank you for for hosting such an interesting competition and for the chance to try out such a fun new architecture! Many of us on this team have been wanting to try something hyper-custom like this for a while, and this was the perfect chance to stretch our abilities! It was a lot of fun, okay now back to my day job!
+
+-Kastan, Seonghwan, and Daniel.
