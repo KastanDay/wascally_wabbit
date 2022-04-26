@@ -6,7 +6,6 @@ import torch.nn as nn
 from torch.autograd import Variable
 from sklearn.preprocessing import MinMaxScaler
 
-
 class LSTM(nn.Module):
 
     def __init__(self, input_size, hidden_size, num_layers):
@@ -38,7 +37,6 @@ class LSTM(nn.Module):
         return ula.to(device)
 
 
-
 gpu_ids = []
 if torch.cuda.is_available():
     gpu_ids += [gpu_id for gpu_id in range(torch.cuda.device_count())]
@@ -47,8 +45,7 @@ if torch.cuda.is_available():
 else:
     device = torch.device('cpu')
 
-print(gpu_ids)
-print("IDS")
+print(f"gpu_ids: {gpu_ids}")
 
 trainX = torch.from_numpy(torch.load('train_embeddings_np_132.pth'))
 trainY = torch.from_numpy(torch.load('Y_train_reshaped_np.pth'))
@@ -57,17 +54,24 @@ print(trainX.shape)
 print(trainY.shape)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = 'cpu'
 # torch.cuda.set_device(0)
 # device = "cuda:0"
 print("USING DEVICE", device)
 dtype = torch.float
 
-trainY_reshape = torch.reshape(trainY, (133, 960, 10 * 13 * 13 * 13)).to(device)
-trainX_reshape = torch.reshape(trainX, (133, 960, 4 * 8)).to(device)
+trainY_reshape = torch.reshape(trainY, (133, 960, 10 * 13 * 13 * 13))
+trainX_reshape = torch.reshape(trainX, (133, 960, 4 * 8))
+
+trainY_reshape = trainY_reshape[0:20, 0:1, :]
+trainY_reshape.to(device)
+
+trainX_reshape = trainX_reshape[0:20, 0:1, :]
+trainX_reshape.to(device)
 
 print("all data loaded")
 
-num_epochs = 100
+num_epochs = 3
 learning_rate = 0.01
 input_size = 32 # Modify to embedding size
 hidden_size = 10 * 13 * 13 * 13 # Modify to output size
@@ -85,7 +89,7 @@ optimizer = torch.optim.Adam(lstm.parameters(), lr=learning_rate)
 
 # Train the model
 for epoch in range(num_epochs):
-    print("epoch 1 starting...")
+    print(f"epoch {epoch} starting...")
 
     print("trainY:", trainY_reshape.get_device())
     print("trainX:", trainX_reshape.get_device())
@@ -111,9 +115,9 @@ for epoch in range(num_epochs):
 print("RUNNING EVAL .........")
 
 lstm.eval()
-data_predict = lstm(trainX)
+data_predict = lstm(trainX_reshape)
 predictions = data_predict.data.numpy().flatten()
-testY = trainY.flatten()
+testY = trainY_reshape.flatten()
 
 
 print("DOING FINAL EVAL")
