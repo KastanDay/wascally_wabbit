@@ -67,7 +67,7 @@ My appologies that I was unable to report the L1 loss for XGBoost.
 ![3D CNN-LSTM HAL Hackathon Architecture](https://user-images.githubusercontent.com/13607221/165409945-44d4f4be-06a5-4d64-83ea-dda053561471.png)
 
 
-The CNN to LSTM model needs significant hyperparemeter tuning to be more accurate. Currently we compress the embedding layers far too much, our Space Embedding shape is `(time, "sentences", embedding-dim) == (133, 960, 32)`. So we compress each 3D shape from `(133 * 196 * 39) =~ 1 million` to `32`, which is likely too much compression. Also our LSTM is quite shallow, with only 2 LSTM layers in each direction. Therefore, if we had time to optimize (1) the Space Embedding size, (2) the number of LSTM layers and (3) the LSTM lauers' hidden size we would get much better results.
+The CNN to LSTM model needs significant hyperparemeter tuning to be more accurate. Currently we compress the embedding layers far too much, our Space Embedding shape is `(time, "sentences", embedding-dim) == (133, 960, 32)`. So we compress each 3D shape from `(66 (our filtered X-variables) * 133 * 196 * 39) =~ 67 million` to `32`, which is a **huge** amount of compression. Also our LSTM is quite shallow, with only 2 LSTM layers in each direction. Therefore, if we had time to optimize (1) the Space Embedding size, (2) the number of LSTM layers and (3) the LSTM lauers' hidden size we would get much better results.
 
 Nevertheless, the entire system is connected together and working! Here is our final result: 
 
