@@ -1,6 +1,6 @@
 # NCSA Atmospheric Science Hackathon (Fall '22)
 
-## Data Pre-processing (filtering & dimensionality reduction
+## Data Pre-processing (filtering & dimensionality reduction)
 
 ![Data preprocessing](https://user-images.githubusercontent.com/13607221/165446984-1b6aa66f-4e32-422d-bab5-f141a941da2a.png)
 
@@ -83,4 +83,4 @@ These scores are calcuated by "flattening" the Y data, so it is averaged across 
 
 Thank you for hosting such an interesting competition and for the chance to try out such a fun new architecture! Many of us on this team have been wanting to try something hyper-custom like this for a while, and this was the perfect chance to stretch our abilities! It was a lot of fun, okay now back to my day job!
 
--Kastan, Seonghwan, and Daniel.
+-Kastan, Seonghwan, Vardhan and Daniel.
