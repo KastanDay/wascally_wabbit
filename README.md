@@ -1,5 +1,11 @@
 # NCSA Atmospheric Science Hackathon (Fall '22)
 
+## Data Pre-processing (filtering & dimensionality reduction
+
+![Data preprocessing](https://user-images.githubusercontent.com/13607221/165446984-1b6aa66f-4e32-422d-bab5-f141a941da2a.png)
+
+## XGBoost: both feature selection & a full solution
+
 Here are two representitive hyperparameter searcher for optimal XGBoost parameters on a per-model basis. Unlike other teams, we got reasonable performance out of a purely XGBoost solution. 
 
 Grid-search exploration (less productive, little variance between models): https://wandb.ai/kastan/HAL-Hack-XGBoost-Sweep
@@ -64,7 +70,7 @@ My appologies that I was unable to report the L1 loss for XGBoost.
 
 ## CNN to LSTM model
 
-![3D CNN-LSTM HAL Hackathon Architecture](https://user-images.githubusercontent.com/13607221/165409945-44d4f4be-06a5-4d64-83ea-dda053561471.png)
+![Hal Hackathon v5](https://user-images.githubusercontent.com/13607221/165447026-b137c627-67b7-4745-afb4-0ee538fc0e0e.png)
 
 
 The CNN to LSTM model needs significant hyperparemeter tuning to be more accurate. Currently we compress the embedding layers far too much, our Space Embedding shape is `(time, "sentences", embedding-dim) == (133, 960, 32)`. So we compress each 3D shape from `(66 (our filtered X-variables) * 133 * 196 * 39) =~ 67 million` to `32`, which is a **huge** amount of compression. Also our LSTM is quite shallow, with only 2 LSTM layers in each direction. Therefore, if we had time to optimize (1) the Space Embedding size, (2) the number of LSTM layers and (3) the LSTM lauers' hidden size we would get much better results.
