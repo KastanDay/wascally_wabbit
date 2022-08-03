@@ -1,5 +1,7 @@
 # NCSA Atmospheric Science Hackathon (Fall '22)
 
+# Update: We finished 3rd place overall w/ cash prize! 🎉
+
 ## Data Pre-processing (filtering & dimensionality reduction)
 
 ![Data preprocessing](https://user-images.githubusercontent.com/13607221/165446984-1b6aa66f-4e32-422d-bab5-f141a941da2a.png)
